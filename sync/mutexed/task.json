@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "targets": ["unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["stress_tests"],
+      "profiles": [
+        "Fiber",
+        "Debug",
+        "FaultyThreadTSan"
+      ]
+    }
+  ],
+  "submit_files": ["mutexed.hpp"],
+  "lint_files": ["mutexed.hpp"],
+  "forbidden": [
+    {
+      "patterns": ["unlock"],
+      "hint": "Use std::lock_guard"
+    },
+    {
+      "patterns": [
+        "Define your own OwnerRef"
+      ],
+      "hint": "Remove this comment"
+    }
+  ]
+}

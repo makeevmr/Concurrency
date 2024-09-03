@@ -1,0 +1,5 @@
+begin_task()
+task_link_libraries(tinyfiber)
+set_task_sources(sim.hpp sim.cpp spinlock.hpp)
+add_task_test(test test.cpp)
+end_task()

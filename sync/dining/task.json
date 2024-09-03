@@ -1,0 +1,21 @@
+{
+  "tests": [
+    {
+      "targets": ["stress_tests"],
+      "profiles": [
+        "Fiber",
+        "Debug",
+        "FaultyThreadTSan"
+      ]
+    }
+  ],
+  "lint_files": [
+    "table.cpp",
+    "table.hpp",
+    "philosopher.hpp",
+    "philosopher.cpp"
+  ],
+  "submit_files": [
+    "philosopher.cpp"
+  ]
+}
