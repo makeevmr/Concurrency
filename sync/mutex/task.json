@@ -1,0 +1,45 @@
+{
+  "tests": [
+    {
+      "targets": ["unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["random_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["stress_tests"],
+      "profiles": [
+        "Fiber",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": ["futex_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["model_tests"],
+      "profiles": ["Matrix"]
+    }
+  ],
+  "submit_files": ["mutex.hpp"],
+  "lint_files": ["mutex.hpp"],
+  "forbidden": [
+    {
+      "patterns": [
+        "std::mutex",
+        "sleep"
+      ],
+      "hint": "Use atomics + futex"
+    },
+    {
+      "patterns": [
+        "WakeAll"
+      ],
+      "hint": "Use WakeOne instead, WakeAll can mask synchronization issues and does not match ownership transfer semantics for Mutex"
+    }
+  ]
+}

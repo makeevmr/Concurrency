@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "targets": ["unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["random_tests"],
+      "profiles": [
+        "Matrix"
+      ]
+    },
+    {
+      "targets": ["stress_tests"],
+      "profiles": [
+        "Debug",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": ["dont_wait_tests"],
+      "profiles": [
+        "Matrix"
+      ]
+    }
+  ],
+  "lint_files": ["ticket_lock.hpp"],
+  "submit_files": ["ticket_lock.hpp"]
+}

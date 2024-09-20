@@ -1,0 +1,70 @@
+{
+  "tests": [
+    {
+      "targets": ["sema_unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["sema_random_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["sema_stress_tests"],
+      "profiles": [
+        "Fiber",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": ["queue_unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["queue_random_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["queue_stress_tests"],
+      "profiles": [
+        "Fiber",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    }
+  ],
+  "lint_files": [
+    "semaphore.hpp",
+    "queue.hpp"
+  ],
+  "submit_files": [
+    "semaphore.hpp",
+    "queue.hpp"
+  ],
+  "forbidden": [
+    {
+      "patterns": [
+        "yield",
+        "sleep_for",
+        "SpinWait"
+      ],
+      "hint": "Use condition_variable"
+    },
+    {
+      "patterns": [
+        "atomic"
+      ]
+    },
+    {
+      "patterns": [
+        "SomeTag"
+      ],
+      "hint": "Consider better naming"
+    },
+    {
+      "files": ["queue.hpp"],
+      "patterns": ["\"semaphore.hpp\""],
+      "hint": "Use TaggedSemaphore"
+    }
+  ]
+}
