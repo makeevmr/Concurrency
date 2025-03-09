@@ -1,4 +1,4 @@
-#include "../cyclic_barrier.hpp"
+#include "../source/cyclic_barrier.hpp"
 
 #include <course/test/twist.hpp>
 
@@ -6,7 +6,7 @@
 #include <twist/assist/random.hpp>
 #include <twist/assist/shared.hpp>
 
-#include <twist/test/wg.hpp>
+#include <twist/test/body/wg.hpp>
 
 TEST_SUITE(RandomBarrier) {
   TWIST_RANDOMIZE(Waves, 5s) {
@@ -18,7 +18,7 @@ TEST_SUITE(RandomBarrier) {
 
     CyclicBarrier barrier{threads};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(threads, [&] {
       for (size_t i = 0; i < waves; ++i) {
@@ -39,7 +39,7 @@ TEST_SUITE(RandomBarrier) {
     CyclicBarrier barrier{threads};
     twist::assist::Shared<size_t> leader{0u};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(threads, [&](size_t me) {
       for (size_t i = 0; i < waves; ++i) {

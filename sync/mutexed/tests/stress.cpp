@@ -1,20 +1,20 @@
-#include "../mutexed.hpp"
+#include "../source/mutexed.hpp"
 
 #include <course/test/twist.hpp>
 #include <course/test/time_budget.hpp>
 
-#include <twist/test/wg.hpp>
-#include <twist/test/plate.hpp>
+#include <twist/test/body/wg.hpp>
+#include <twist/test/body/plate.hpp>
 
 TEST_SUITE(Mutexed) {
   TWIST_STRESS_TEST(Contention, 3s) {
     static const size_t kThreads = 3;
 
     // Set of hungry threads
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     // Plate shared between threads
-    Mutexed<twist::test::Plate> plate;
+    Mutexed<twist::test::body::Plate> plate;
 
     wg.Add(kThreads, [&] {
       course::test::TimeBudget budget;

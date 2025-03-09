@@ -20,7 +20,7 @@
   ],
   "lint_files": ["cyclic_barrier.hpp"],
   "submit_files": ["cyclic_barrier.hpp"],
-  "forbidden": [
+  "censor": [
     {
       "patterns": [
         "yield",

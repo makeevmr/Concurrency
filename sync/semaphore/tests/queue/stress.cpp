@@ -1,11 +1,11 @@
-#include "../../queue.hpp"
+#include "../../source/queue.hpp"
 
 #include <course/test/twist.hpp>
 #include <course/test/time_budget.hpp>
 
 #include <twist/ed/std/atomic.hpp>
 
-#include <twist/test/wg.hpp>
+#include <twist/test/body/wg.hpp>
 
 #include <fmt/core.h>
 
@@ -17,7 +17,7 @@ TEST_SUITE(StressQueue) {
 
     BoundedBlockingQueue<int> queue{kCapacity};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     twist::ed::std::atomic_size_t takes{0};
     twist::ed::std::atomic_size_t puts{0};

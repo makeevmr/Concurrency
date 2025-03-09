@@ -50,7 +50,7 @@ public:
 
 private:
     T object_;
-    Mutex mutex_; // Guards access to object_
+    Mutex mutex_;  // Guards access to object_
 };
 
 template <typename T>

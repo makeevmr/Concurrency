@@ -7,7 +7,7 @@
   ],
   "submit_files": ["sims"],
   "lint_files": ["sims"],
-  "forbidden": [
+  "censor": [
     {
       "patterns": ["I am a Fiber"],
       "hint": "Remove this comment"

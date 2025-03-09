@@ -1,4 +1,4 @@
-#include "../cyclic_barrier.hpp"
+#include "../source/cyclic_barrier.hpp"
 
 #include <wheels/test/framework.hpp>
 

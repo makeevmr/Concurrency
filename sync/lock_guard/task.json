@@ -7,7 +7,7 @@
   ],
   "submit_files": ["lock_guard.hpp"],
   "lint_files": ["lock_guard.hpp"],
-  "forbidden": [
+  "censor": [
     {
       "patterns": [
         "std::lock_guard"

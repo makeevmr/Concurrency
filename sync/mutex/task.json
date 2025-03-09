@@ -27,7 +27,7 @@
   ],
   "submit_files": ["mutex.hpp"],
   "lint_files": ["mutex.hpp"],
-  "forbidden": [
+  "censor": [
     {
       "patterns": [
         "std::mutex",

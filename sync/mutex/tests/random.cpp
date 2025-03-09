@@ -1,8 +1,8 @@
-#include "../mutex.hpp"
+#include "../source/mutex.hpp"
 
 #include <course/test/twist.hpp>
 
-#include <twist/test/wg.hpp>
+#include <twist/test/body/wg.hpp>
 
 #include <twist/assist/shared.hpp>
 #include <twist/assist/random.hpp>
@@ -14,7 +14,7 @@ TEST_SUITE(MutexRandomCheck) {
 
     const size_t threads = choice(2, 5);
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
     twist::assist::Shared<size_t> owner{0u};
 
     Mutex mutex;

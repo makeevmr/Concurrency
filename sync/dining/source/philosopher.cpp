@@ -1,6 +1,6 @@
 #include "philosopher.hpp"
 
-#include <twist/test/inject_fault.hpp>
+#include <twist/test/body/inject_fault.hpp>
 
 namespace dining {
 
@@ -47,7 +47,7 @@ namespace dining {
 
     void Philosopher::Think() {
         // Random pause or context switch
-        twist::test::InjectFault();
+        twist::test::body::InjectFault();
     }
 
-} // namespace dining
+}  // namespace dining

@@ -1,4 +1,4 @@
-#include "../mutexed.hpp"
+#include "../source/mutexed.hpp"
 
 #include <wheels/test/framework.hpp>
 

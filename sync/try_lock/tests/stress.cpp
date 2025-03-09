@@ -1,12 +1,12 @@
-#include "../ticket_lock.hpp"
+#include "../source/ticket_lock.hpp"
 
 #include <course/test/twist.hpp>
 #include <course/test/time_budget.hpp>
 
-#include <twist/test/inject_fault.hpp>
-#include <twist/test/wg.hpp>
-#include <twist/test/plate.hpp>
-#include <twist/test/either.hpp>
+#include <twist/test/body/inject_fault.hpp>
+#include <twist/test/body/wg.hpp>
+#include <twist/test/body/plate.hpp>
+#include <twist/test/body/either.hpp>
 
 #include <twist/ed/wait/spin.hpp>
 
@@ -18,16 +18,16 @@ using namespace std::chrono_literals;  // NOLINT
 
 TEST_SUITE(TicketTryLock) {
   void StressTest(size_t threads) {
-    twist::test::Plate plate;  // Guarded by ticket_lock
+    twist::test::body::Plate plate;  // Guarded by ticket_lock
     TicketLock ticket_lock;
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(threads, [&] {
       course::test::TimeBudget time_budget;
 
       while (time_budget) {
-        if (twist::test::Either()) {
+        if (twist::test::body::Either()) {
           ticket_lock.Lock();
           plate.Access();
           ticket_lock.Unlock();

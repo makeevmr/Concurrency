@@ -1,9 +1,9 @@
-#include "../ticket_lock.hpp"
+#include "../source/ticket_lock.hpp"
 
 #include <course/test/twist.hpp>
 
-#include <twist/test/wg.hpp>
-#include <twist/test/either.hpp>
+#include <twist/test/body/wg.hpp>
+#include <twist/test/body/either.hpp>
 
 #include <twist/assist/shared.hpp>
 #include <twist/assist/random.hpp>
@@ -19,11 +19,11 @@ TEST_SUITE(TicketTryLock) {
     TicketLock ticket_lock;
     twist::assist::Shared<size_t> owner{0u};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(threads, [&, locks](size_t me) {
       for (size_t k = 0; k < locks; ++k) {
-        if (twist::test::Either()) {
+        if (twist::test::body::Either()) {
           ticket_lock.Lock();
           owner.Write(me);
           ticket_lock.Unlock();

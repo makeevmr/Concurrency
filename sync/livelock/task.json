@@ -7,6 +7,6 @@
   ],
   "lint_files": ["sim.cpp"],
   "submit_files": ["sim.cpp"],
-  "forbidden": [
+  "censor": [
   ]
 }

@@ -1,6 +1,6 @@
 #include <wheels/test/framework.hpp>
 
-#include "sim.hpp"
+#include "source/sim.hpp"
 
 #include <tf/rt/scheduler.hpp>
 

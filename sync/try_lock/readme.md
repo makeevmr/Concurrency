@@ -1,6 +1,6 @@
 # TryLock для TicketLock
 
-Реализуйте метод `TryLock` для [`TicketLock`](ticket_lock.hpp).
+Реализуйте метод `TryLock` для [`TicketLock`](source/ticket_lock.hpp).
 
 Семантика `TryLock`:
 
@@ -15,8 +15,6 @@
 
 Неудачные попытки `TryLock` не должны приводить к вечным блокировкам вызовов `Lock`.
 
-Изучите также гарантии [`try_lock` у `std::mutex`](https://en.cppreference.com/w/cpp/thread/mutex/try_lock).
-
 ---
 
 В решении вы можете использовать любые атомарные RMW-операции, которые есть у [std::atomic](https://en.cppreference.com/w/cpp/atomic/atomic).
@@ -25,9 +23,14 @@
 
 ## Формализация
 
-Попробуйте описать семантику `TryLock` более формально. 
+Попробуйте описать семантику `TryLock` формально. 
 
-Что значит «Если спинлок свободен»? Про какой именно момент идет речь? 
+Что значит «_если спинлок свободен_»? Про какой момент идет речь?
+
+### References
+
+- https://jepsen.io/consistency/models/linearizable
+- [Linearizability: A Correctness Condition for Concurrent Objects](https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf)
 
 ## Weak MM
 
@@ -35,6 +38,6 @@
 
 Может ли `TryLock` соврать пользователю, что спинлок захвачен, хотя на самом деле он свободен?
 
-Какие гарантии дает [`try_lock`](https://en.cppreference.com/w/cpp/thread/mutex/try_lock) у `std::mutex`?
+Изучите [гарантии](https://eel.is/c++draft/thread.mutex.requirements#mutex.general-15) `std::mutex::try_lock`.
 
-Почему так? Ответ – сложный: [Foundations of the C++ Concurrency Memory Model](https://www.hpl.hp.com/techreports/2008/HPL-2008-56.pdf)
+Почему так? Ответ – сложный: [Foundations of the C++ Concurrency Memory Model](https://rsim.cs.uiuc.edu/Pubs/08PLDI.pdf)

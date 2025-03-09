@@ -1,9 +1,9 @@
-#include "../mutex.hpp"
+#include "../source/mutex.hpp"
 
 #include <course/test/twist.hpp>
 
-#include <twist/test/wg.hpp>
-#include <twist/test/budget.hpp>
+#include <twist/test/body/wg.hpp>
+#include <twist/test/body/budget.hpp>
 
 #include <twist/assist/shared.hpp>
 
@@ -12,7 +12,7 @@ TEST_SUITE(MutexModel) {
     Mutex mutex;
     twist::assist::Shared<size_t> owner{0u};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(2, [&](size_t me) {
       for (size_t i = 0; i < 2; ++i) {
@@ -30,15 +30,15 @@ TEST_SUITE(MutexModel) {
 
   const auto kTrioParams =
       course::test::twist::model::Params{
-          .max_preemptions = 4,
+          .max_preempts = 4,
           .max_steps = 128};
 
   TWIST_MODEL(Trio, kTrioParams) {
     Mutex mutex;
     twist::assist::Shared<size_t> owner{0u};
 
-    twist::test::WaitGroup wg;
-    twist::test::Budget budget{5};
+    twist::test::body::WaitGroup wg;
+    twist::test::body::Budget budget{5};
 
     wg.Add(3, [&](size_t me) {
       while (budget.Withdraw(1)) {

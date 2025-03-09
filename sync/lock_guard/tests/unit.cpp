@@ -1,6 +1,6 @@
-#include <wheels/test/framework.hpp>
+#include "../source/lock_guard.hpp"
 
-#include "../lock_guard.hpp"
+#include <wheels/test/framework.hpp>
 
 #include <mutex>
 #include <utility>

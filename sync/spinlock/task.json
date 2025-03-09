@@ -14,7 +14,7 @@
     "atomic.S",
     "spinlock.hpp"
   ],
-  "forbidden": [
+  "censor": [
     {
       "patterns": [
         "Your asm code goes here",

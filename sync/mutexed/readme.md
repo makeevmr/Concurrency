@@ -89,7 +89,7 @@ Mutexed<int> shared_int{0};
 
 ## Задание
 
-Реализуйте [`Mutexed<T>`](mutexed.hpp).
+Реализуйте [`Mutexed<T>`](source/mutexed.hpp).
 
 ### Замечания по реализации
 

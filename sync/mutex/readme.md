@@ -7,11 +7,11 @@
 
 ## Задание
 
-Реализуйте [`Mutex`](mutex.hpp) ~ [std::mutex](https://ru.cppreference.com/w/cpp/thread/mutex).
+Реализуйте [`Mutex`](source/mutex.hpp) ~ [std::mutex](https://ru.cppreference.com/w/cpp/thread/mutex).
 
 ### Требования к реализации
 
-* Если поток не может захватить мьютекс, потому что его опережают другие потоки, то он должен запарковаться на фьютексе и освободить ядро процессора.
+* Если поток не может захватить мьютекс из-за того, что его опережают другие потоки, то он должен запарковаться на фьютексе и освободить ядро процессора.
 * Если contention-а нет, то захват и освобождение мьютекса должны выполняться без переключения в ядро операционной системы, т.е. без выполнения системных вызовов.
 
 ## Futex
@@ -46,58 +46,24 @@ Futex – ядерная очередь спящих потоков, котор�
 Другие операционные системы предоставляют собственные (похожие, но не идентичные по семантике) системные вызовы: Windows – `WaitOnAddress`, Darwin – `ulock_wait`.
 
 
-## `twist::ed::futex`
+## Twist-_ed_ Futex
 
-Мы будем работать с системным механизмом ожидания через API `twist/ed/wait/futex.hpp`:
+Мы будем работать с системным механизмом ожидания через API Twist:
 
 - [API](https://gitlab.com/Lipovsky/twist/-/blob/master/docs/ru/twist/ed/wait/futex.md)
 - [Пример использования](https://gitlab.com/Lipovsky/twist/-/blob/master/examples/futex/main.cpp)
 
-### Отличия от системного вызова `futex`
+## † Адаптивность
+ 
+Универсальная реализация мьютекса будет _адаптивной_ (_adaptive_): ждущий поток сначала оптимистично кружится на ядре процессора, и только потом паркуется в ядре операционной системы.
 
-Обозначим через `SysWait` и `SysWake` системные вызовы для блокирующего ожидания и пробуждения (например, `futex` режимах `FUTEX_WAIT` и `FUTEX_WAKE` в случае Linux).
+Для адаптивной реализации вам пригодится метод [`ConsiderParking`](https://gitlab.com/Lipovsky/twist/-/blob/master/docs/ru/twist/ed/wait/spin.md?ref_type=heads#considerparking) у `twist::ed::SpinWait`.
 
-`futex::Wait` оборачивает вызов `SysWait` в цикл с перепроверкой условия:
+## Abseil
 
-```cpp
-void Wait(std::atomic<uint32_t>& atom, uint32_t old) {
-  while (atom.load() == old) {
-    SysWait(Addr(atom), old);
-  }
-}
-```
+Самая продвинутая попытка реализовать универсальный адаптивный мьютекс принадлежит Google: [absl::Mutex](https://github.com/abseil/abseil-cpp/blob/master/absl/synchronization/mutex.h)
 
-Этот дополнительный цикл сглаживает разницу в семантике между механизмами ожидания в разных операционных системах.
-
-`Wake` – двухфазный:
-
-1) Сначала (_до_ записи в атомик, которая предшествует пробуждению) с помощью `PrepareWake` фиксируется ключ (`WakeKey`) для адресации системной очереди ожидания для атомика (фактически – адрес ячейки памяти):
-
-```cpp
-WakeKey PrepareWake(std::atomic<uint32_t>& atom) {
-  return {Addr(atom)};
-}
-````
-
-2) Затем (_после_ записи в атомик) вызывается `SysWake` с адресом, который был взят на первом шаге:
-
-```cpp
-void WakeOne(WakeKey key) {
-  SysWake(key.addr, 1);
-}
-```
-
-### Ограничения
-
-Фьютекс работает только с 32-битными словами в пространстве пользователя, так что `Wait` поддерживает только `atomic<uint32_t>`.
-
-## <sup>†</sup> Адаптивность
-
-Реализация может действовать _адаптивно_: сначала оптимистично покрутиться на ядре процессора, и только потом парковаться в ядре операционной системы.
-
-См. метод [`ConsiderParking`](https://gitlab.com/Lipovsky/twist/-/blob/master/docs/ru/twist/ed/wait/spin.md?ref_type=heads#considerparking) у `twist::ed::SpinWait`.
-
-## `TWIST_MODEL`
+## Model Checking
 
 [Тесты](tests/model.cpp) типа [`TWIST_MODEL`](/library/testing/README.md) перебирают все чередования с заданным количеством вытеснений. Чем эффективнее
 ваше решение, тем меньше исполнений потребуется исследовать при тестировании.

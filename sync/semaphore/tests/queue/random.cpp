@@ -1,4 +1,4 @@
-#include "../../queue.hpp"
+#include "../../source/queue.hpp"
 
 #include <course/test/twist.hpp>
 
@@ -7,7 +7,7 @@
 #include <twist/assist/assert.hpp>
 #include <twist/assist/random.hpp>
 
-#include <twist/test/wg.hpp>
+#include <twist/test/body/wg.hpp>
 
 TEST_SUITE(RandomQueue) {
   TWIST_RANDOMIZE(ProducersConsumers, 5s) {
@@ -20,7 +20,7 @@ TEST_SUITE(RandomQueue) {
 
     BoundedBlockingQueue<int> queue{capacity};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     twist::ed::std::atomic<size_t> consumed{0};
     twist::ed::std::atomic<size_t> countdown{producers};

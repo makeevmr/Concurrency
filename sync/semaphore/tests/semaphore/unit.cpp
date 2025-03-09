@@ -1,4 +1,4 @@
-#include "../../semaphore.hpp"
+#include "../../source/semaphore.hpp"
 
 #include <wheels/test/framework.hpp>
 

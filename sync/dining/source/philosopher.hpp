@@ -32,4 +32,4 @@ namespace dining {
         size_t meals_ = 0;
     };
 
-} // namespace dining
+}  // namespace dining

@@ -2,7 +2,7 @@
 
 #include <twist/sim.hpp>
 
-#include "../mutex.hpp"
+#include "../source/mutex.hpp"
 
 static_assert(twist::build::IsolatedSim());
 

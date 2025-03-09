@@ -4,12 +4,12 @@ template <typename Mutex>
 class LockGuard {
 public:
     explicit LockGuard(Mutex& mutex)
-        : mutex_owner_(mutex) {
-        mutex_owner_.lock();
+        : mutex_(mutex) {
+        mutex_.lock();
     }
 
     ~LockGuard() {
-        mutex_owner_.unlock();
+        mutex_.unlock();
     }
 
     // Non-copyable
@@ -21,5 +21,5 @@ public:
     LockGuard& operator=(LockGuard&&) = delete;
 
 private:
-    Mutex& mutex_owner_;
+    Mutex& mutex_;
 };

@@ -1,9 +1,8 @@
-#include "../../semaphore.hpp"
-#include "../../queue.hpp"
+#include "../../source/semaphore.hpp"
 
 #include <course/test/twist.hpp>
 
-#include <twist/test/wg.hpp>
+#include <twist/test/body/wg.hpp>
 
 #include <twist/ed/std/atomic.hpp>
 
@@ -22,7 +21,7 @@ TEST_SUITE(RandomSemaphore) {
     Semaphore sema{limit};
     twist::ed::std::atomic_size_t load{0};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(clients, [&] {
       sema.Acquire();
@@ -46,7 +45,7 @@ TEST_SUITE(RandomSemaphore) {
     Semaphore mutex{1};
     twist::assist::Shared<int> owner;
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(contenders, [&](size_t index) {
       mutex.Acquire();

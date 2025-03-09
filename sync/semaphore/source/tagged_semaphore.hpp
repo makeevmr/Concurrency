@@ -8,28 +8,27 @@ template <class Tag>
 class TaggedSemaphore {
 public:
     // ~ Linear
-    class Token {
+    class Permit {
         friend class TaggedSemaphore;
 
     public:
-        ~Token() {
+        ~Permit() {
             assert(!valid_);
         }
 
         // Non-copyable
-        Token(const Token&) = delete;
-        Token& operator=(const Token&) = delete;
+        Permit(const Permit&) = delete;
+        Permit& operator=(const Permit&) = delete;
 
         // Movable
-
-        Token(Token&& that) {
+        Permit(Permit&& that) {
             that.Invalidate();
         }
 
-        Token& operator=(Token&&) = delete;
+        Permit& operator=(Permit&&) = delete;
 
     private:
-        Token() = default;
+        Permit() = default;
 
         void Invalidate() {
             assert(valid_);
@@ -41,17 +40,17 @@ public:
     };
 
 public:
-    explicit TaggedSemaphore(size_t tokens)
-        : impl_(tokens) {}
+    explicit TaggedSemaphore(size_t permits)
+        : impl_(permits) {}
 
-    Token Acquire() {
+    Permit Acquire() {
         impl_.Acquire();
-        return Token{};
+        return Permit{};
     }
 
-    void Release(Token&& token) {
+    void Release(Permit&& permit) {
         impl_.Release();
-        token.Invalidate();
+        permit.Invalidate();
     }
 
 private:

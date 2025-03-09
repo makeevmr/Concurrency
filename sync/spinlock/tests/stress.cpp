@@ -1,10 +1,10 @@
-#include "../spinlock.hpp"
+#include "../source/spinlock.hpp"
 
 #include <course/test/twist.hpp>
 #include <course/test/time_budget.hpp>
 
-#include <twist/test/wg.hpp>
-#include <twist/test/plate.hpp>
+#include <twist/test/body/wg.hpp>
+#include <twist/test/body/plate.hpp>
 
 #include <twist/ed/wait/spin.hpp>
 
@@ -18,10 +18,10 @@ using namespace std::chrono_literals;
 
 TEST_SUITE(SpinLock) {
   void StressTest(size_t lockers, size_t try_lockers) {
-    twist::test::Plate plate;  // Guarded by spinlock
+    twist::test::body::Plate plate;  // Guarded by spinlock
     TASSpinLock spinlock;
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(lockers, [&] {
       course::test::TimeBudget budget;

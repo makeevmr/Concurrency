@@ -1,11 +1,11 @@
-#include "../table.hpp"
-#include "../philosopher.hpp"
+#include "../source/table.hpp"
+#include "../source/philosopher.hpp"
 
 #include <course/test/twist.hpp>
 #include <course/test/time_budget.hpp>
 
-#include <twist/test/inject_fault.hpp>
-#include <twist/test/wg.hpp>
+#include <twist/test/body/inject_fault.hpp>
+#include <twist/test/body/wg.hpp>
 
 #include <vector>
 
@@ -22,7 +22,7 @@ TEST_SUITE(Dining) {
       philosophers.emplace_back(table, seat);
     }
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(kSeats, [&](size_t seat) {
       auto& plato = philosophers.at(seat);

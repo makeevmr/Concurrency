@@ -1,0 +1,48 @@
+{
+  "tests": [
+    {
+      "targets": ["unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["random_tests"],
+      "profiles": [
+        "Matrix",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": ["model_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["futex_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["storage_tests"],
+      "profiles": [
+        "Matrix",
+        "FaultyThreadASan"
+      ]
+    }
+  ],
+  "lint_files": [
+    "wait_group.hpp"
+  ],
+  "submit_files": [
+    "wait_group.hpp"
+  ],
+  "censor": [
+    {
+      "files": ["wait_group.hpp"],
+      "patterns": [
+        "yield",
+        "sleep_for",
+        "SpinWait"
+      ],
+      "hint": "Use twist::ed::Wait"
+    }
+  ]
+}

@@ -41,7 +41,7 @@
     "semaphore.hpp",
     "queue.hpp"
   ],
-  "forbidden": [
+  "censor": [
     {
       "patterns": [
         "yield",

@@ -1,4 +1,4 @@
-#include "../ticket_lock.hpp"
+#include "../source/ticket_lock.hpp"
 
 #include <wheels/test/framework.hpp>
 

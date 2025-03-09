@@ -1,4 +1,3 @@
-
 #include <wheels/test/framework.hpp>
 
 // https://gitlab.com/Lipovsky/tinyfiber
@@ -44,4 +43,3 @@ void LiveLock() {
     WaitGroup wg;
     wg.Spawn(contender).Spawn(contender).Wait();
 };
-

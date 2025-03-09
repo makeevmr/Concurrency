@@ -2,6 +2,6 @@
 
 namespace dining {
 
-    //
+//
 
-} // namespace dining
+}  // namespace dining

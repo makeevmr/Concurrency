@@ -1,5 +1,5 @@
-#include "../spinlock.hpp"
-#include "../atomic.h"
+#include "../source/spinlock.hpp"
+#include "../source/atomic.h"
 
 #include <wheels/test/framework.hpp>
 

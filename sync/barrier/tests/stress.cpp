@@ -1,8 +1,8 @@
-#include "../cyclic_barrier.hpp"
+#include "../source/cyclic_barrier.hpp"
 
 #include <course/test/twist.hpp>
 
-#include <twist/test/wg.hpp>
+#include <twist/test/body/wg.hpp>
 
 #include <twist/assist/shared.hpp>
 #include <twist/assist/assert.hpp>
@@ -15,7 +15,7 @@ TEST_SUITE(StressBarrier) {
     CyclicBarrier barrier{kThreads};
     twist::assist::Shared<size_t> leader{0u};
 
-    twist::test::WaitGroup wg;
+    twist::test::body::WaitGroup wg;
 
     wg.Add(kThreads, [&](size_t me) {
       for (size_t i = 0; i < kWaves; ++i) {
