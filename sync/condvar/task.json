@@ -1,0 +1,93 @@
+{
+  "tests": [
+    {
+      "targets": ["mutex_unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["mutex_random_tests"],
+      "profiles": [
+        "Matrix"
+      ]
+    },
+    {
+      "targets": ["mutex_stress_tests"],
+      "profiles": [
+        "Release",
+        "FaultyThreadASan",
+        "FaultyThreadTSan",
+        "Fiber"
+      ]
+    },
+    {
+      "targets": ["mutex_model_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["mutex_futex_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["condvar_unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["condvar_random_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["condvar_stress_tests"],
+      "profiles": [
+        "Release",
+        "FaultyThreadASan",
+        "FaultyThreadTSan",
+        "Fiber"
+      ]
+    },
+    {
+      "targets": ["condvar_model_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["event_storage_tests"],
+      "profiles": [
+        "Matrix",
+        "FaultyThreadASan"
+      ]
+    }
+  ],
+  "lint_files": [
+    "mutex.hpp",
+    "condvar.hpp"
+  ],
+  "submit_files": [
+    "mutex.hpp",
+    "condvar.hpp"
+  ],
+  "censor": [
+    {
+      "files": ["condvar.hpp"],
+      "patterns": [
+        "yield",
+        "sleep_for",
+        "SpinWait"
+      ],
+      "hint": "Use futex"
+    },
+    {
+      "files": ["mutex.hpp"],
+      "patterns": [
+        "std::mutex",
+        "sleep"
+      ],
+      "hint": "Use atomics + futex"
+    },
+    {
+      "files": ["mutex.hpp"],
+      "patterns": [
+        "WakeAll"
+      ],
+      "hint": "Use WakeOne instead, WakeAll can mask synchronization issues and does not match ownership transfer semantics for Mutex"
+    }
+  ]
+}

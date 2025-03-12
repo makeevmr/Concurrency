@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "targets": ["mutex_model_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["condvar_model_tests"],
+      "profiles": ["Matrix"]
+    }
+  ]
+}

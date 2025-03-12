@@ -1,0 +1,25 @@
+{
+  "tests": [
+    {
+      "targets": ["condvar_unit_tests"],
+      "profiles": ["Debug"]
+    },
+    {
+      "targets": ["condvar_random_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["condvar_stress_tests"],
+      "profiles": [
+        "Release",
+        "FaultyThreadASan",
+        "FaultyThreadTSan",
+        "Fiber"
+      ]
+    },
+    {
+      "targets": ["condvar_model_tests"],
+      "profiles": ["Matrix"]
+    }
+  ]
+}

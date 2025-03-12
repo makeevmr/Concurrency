@@ -21,7 +21,7 @@ public:
 
     bool TryLock() {
         Ticket expected = owner_ticket_.load();
-        return next_free_ticket_.compare_exchange_weak(
+        return next_free_ticket_.compare_exchange_strong(
             expected, next_free_ticket_.load() + 1);
     }
 

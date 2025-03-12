@@ -1,0 +1,8 @@
+{
+  "tests": [
+    {
+      "targets": ["event_storage_tests"],
+      "profiles": ["Matrix"]
+    }
+  ]
+}
