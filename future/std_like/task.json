@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "targets": ["unit_tests"],
+      "profiles": ["DebugASan"]
+    },
+    {
+      "targets": ["model_tests"],
+      "profiles": ["Matrix"]
+    },
+    {
+      "targets": ["random_tests"],
+      "profiles": [
+        "Matrix",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": ["confuse_tests"],
+      "profiles": ["Debug"]
+    }
+  ],	  
+  "lint_files": ["exe"],
+  "submit_files": ["exe"],
+  "censor": [
+    {
+      "patterns": [
+        "std::future",
+        "yield",
+        "sleep_for",
+        "SpinWait"
+      ]
+    }
+  ]
+}
