@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "targets": ["unit_tests"],
+      "profiles": [
+        "Debug",
+        "DebugASan"
+      ]
+    }
+  ],
+  "lint_files": [
+    "coroutine.hpp",
+    "coroutine.cpp"
+  ],
+  "submit_files": [
+    "coroutine.hpp",
+    "coroutine.cpp"
+  ]
+}
