@@ -1,0 +1,98 @@
+{
+  "tests": [
+    {
+      "targets": [
+        "wg_unit_tests"
+      ],
+      "profiles": [
+        "Debug"
+      ]
+    },
+    {
+      "targets": [
+        "wg_random_tests"
+      ],
+      "profiles": [
+        "Matrix",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": [
+        "wg_model_tests"
+      ],
+      "profiles": [
+        "Matrix"
+      ]
+    },
+    {
+      "targets": [
+        "wg_futex_tests"
+      ],
+      "profiles": [
+        "Matrix"
+      ]
+    },
+    {
+      "targets": [
+        "wg_storage_tests"
+      ],
+      "profiles": [
+        "Matrix",
+        "FaultyThreadASan"
+      ]
+    },
+    {
+      "targets": ["runtime_tp_unit_tests"],
+      "profiles": [
+        "DebugASan"
+      ]
+    },
+    {
+      "targets": [
+        "runtime_tp_random_tests"
+      ],
+      "profiles": [
+        "Matrix"
+      ]
+    },
+    {
+      "targets": ["runtime_tp_stress_tests"],
+      "profiles": [
+        "Debug",
+        "FaultyThreadASan",
+        "FaultyThreadTSan"
+      ]
+    },
+    {
+      "targets": ["fiber_sched_tp_unit_tests"],
+      "profiles": [
+        "Debug",
+        "DebugASan"
+      ]
+    },
+    {
+      "targets": ["fiber_sched_tp_stress_tests"],
+      "profiles": [
+        "Debug",
+        "FaultyThreadTSan",
+        "FaultyThreadASan"
+      ]
+    }
+  ],
+  "lint_files": ["exe"],
+  "submit_files": ["exe"],
+  "censor": [
+    {
+      "files": ["exe"],
+      "patterns": [
+        " sure::ExecutionContext",
+        " ::sure::ExecutionContext",
+        " sure::stack::",
+        " ::sure::stack::"
+      ],
+      "hint": "Use twist/ed/sure/"
+    }
+  ]
+}
